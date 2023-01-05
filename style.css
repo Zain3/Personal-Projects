@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box; /* this is our basic CSS reset- set all box-sizing to border-box  */
+    margin: 0; /* manually, w/ padding, set to 0, so we can exclude the margin and padding by default set on paragraph HTML elements within browsers */
+    padding: 0;
+    
+}
+
+body {
+    background-color: #ecf2f8;
+    font-family: 'Barlow Semi Condensed', sans-serif; /* copy and pasted from google fonts for testimonal fonts */
+}
+
+#testimonial-grid-container {
+    padding: 5% 3%; /* can be in % or px. Do % for responsiveness. Shorthand top-bottom left-right padding */
+
+}
+
+#testimonial-1 {
+    background-color: #7541c8;
+    color: #ffffff;
+    position: relative;
+    z-index: 0;
+
+}
+
+#testimonial-2 {
+    background-color: #48556a;
+    color: #ffffff;
+
+}
+
+#testimonial-3, #testimonial-5 {
+    background-color: #ffffff;
+    color: #48556a;
+}
+
+#testimonial-4 {
+    background-color: #19212e;
+    color: #ffffff;
+
+}
+
+
+.grid-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0,.2);
+    font-size: 13px;
+}
+
+.grid-item p {
+    opacity: 70%;
+}
+
+.header {
+    display: flex;
+    align-items: center; /* align items on cross axis to be centered (this centers name + verified graduate) */
+    margin-bottom: 20px;
+    z-index: 3;
+    position: relative; /* set this so the z-index even applies */
+}
+
+.header .name {
+    opacity: 100%;
+    font-size: 1rem;
+
+}
+
+.header img {
+    border-radius: 50%; /* forces the profile pictures to be circular */
+    margin-right: 10px;
+    border: 1px solid #7541c8
+}
+
+.grid-item h4 {
+    margin-bottom: 20px;
+    font-size: 1.2rem; /* 120% of root element */
+    font-weight: 600;
+}
+
+#quote {
+    /* in "testimonial-1, we've made it relative, so now quote is positioned relative to the container, not the entire viewport (which wouldn't be RESPONSIVE) */
+    position: absolute; /* positions the quote RELATIVE TO THE VIEWPORT BY DEFAULT */
+    right: 15%;
+    top: 0px;
+    z-index: 1; /* set z-index to make sure quote goes BEHIND testimonial font */
+
+}
+
+/* ALWAYS put media-queries at BOTTOM of CSS so they do NOT get over-written */
+@media (min-width: 576px) { /* we want a mobile-first design, so set MIN-WIDTH */
+    /* within the media-query, do a desktop-first design  */
+    
+    /* --------- flex rules ------- */
+
+    #testimonial-grid-container, #main-left, #top, #bottom {
+        display: flex;
+    }
+
+    /* because the top 2 items are together, and the bottom 2 are also together, make "top" and "bottom" BOTH flex containers */
+    #top, #bottom {
+        flex-basis: 50%;
+        /* justify-content: space-between; // for flex-box method */
+    }
+
+    #testimonial-1, #testimonial-4 {
+        /* flex-basis: 63%; // if we wanted to do w flexbox*/
+        flex-basis: 65%; /* makes purple box 65% of width */
+    }
+    
+    #testimonial-2, #testimonial-3 {
+        flex-basis: 35%;
+    }
+
+    #testimonial-5 { /* use "#" to target ID */
+        flex-basis: 20%;
+    }
+
+    /* turn main-left into a flex-container to make it equal in height to testimonial-5*/
+    #main-left { /* its direct children, top and bottom, are FLEX ITEMS */
+        flex-direction: column; /* main-axis is VERTICAL, so justify-content works on main-axis */
+        /* flex-basis: 68%; // for flex-box method: slightly reduce FROM 70%, so justify-content in "testimonial-grid-container" (above) can work, to give a gap between HTML elements */
+        flex-basis: 80%;
+    }
+
+    /* --------- regular CSS rules ------- */
+    
+    #testimonial-grid-container {
+        max-width: 1440px;
+        margin: 0 auto; /* shorthand notation to center everything on desktop-version */
+        /* justify-content: space-between; // for flex-box method */ /* flex-direction is ROW by default, so space-between makes a HORIZONTAL space (on main axis) */
+    }
+
+    /* main-left is the parent we want to look at, and focus on all "grid-item" named descendants of that */
+    #main-left .grid-item { /* This solves the problem of gap between 5 HTML ELEMENTS. the other way to solve this problem is with flex-box (see 2 flex-basis lines, 2 justify-content lines commented out) */
+        margin-right: 15px;    
+    }
+    
+}
